@@ -14,6 +14,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="home">
+  <div class="home-car-pass" data-home-car-pass aria-hidden="true">
+    <div class="home-car-smoke">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="home-car-sprite">
+      <img src="assets/powers-car-scroll-transparent.png" alt="">
+      <span class="home-car-shine"></span>
+      <span class="home-car-spark spark-one"></span>
+      <span class="home-car-spark spark-two"></span>
+    </div>
+  </div>
+
   <div class="site-shell">
     <header class="hero hero-home">
       <nav class="topbar">
@@ -160,10 +175,16 @@
       </div>
       <div class="footer-legal">
         <p>&copy; <span id="year"></span> Powers Mobile Auto Detailing. All rights reserved.</p>
-        <nav aria-label="Legal links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-        </nav>
+        <div class="footer-links">
+          <nav aria-label="Legal links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </nav>
+          <nav class="footer-socials" aria-label="Social media links">
+            <a href="#" aria-label="Facebook profile"><span class="facebook-icon" aria-hidden="true">f</span></a>
+            <a href="#" aria-label="Instagram profile"><span class="instagram-icon" aria-hidden="true"></span></a>
+          </nav>
+        </div>
       </div>
     </footer>
   </div>

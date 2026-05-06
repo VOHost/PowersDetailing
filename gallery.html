@@ -6,7 +6,7 @@
   <title>Gallery | Powers Mobile Auto Detailing</title>
   <meta
     name="description"
-    content="Browse the gallery foundation for Powers Mobile Auto Detailing and swap in real before-and-after images later."
+    content="Browse real vehicle and interior detailing photos from Powers Mobile Auto Detailing in Huntsville, Alabama."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,41 +52,78 @@
 
       <div class="page-hero-content">
         <p class="eyebrow">Gallery</p>
-        <h1>A dedicated work gallery instead of squeezing photos into one long page.</h1>
+        <h1>Recent mobile detailing work with clean, real-world shine.</h1>
         <p class="page-intro">
-          These image slots are designed to look complete now and can later be replaced with real
-          detailing jobs, before-and-after shots, and recent customer vehicles.
+          Flip through recent exterior, truck, sedan, van, and work-vehicle details completed for
+          customers around the Huntsville area.
         </p>
       </div>
     </header>
 
     <main>
       <section class="section">
-        <div class="gallery-grid">
-          <article class="gallery-card gallery-one">
-            <div class="gallery-overlay">
-              <p>Daily Driver Refresh</p>
-              <span>Interior reset plus exterior gloss finish</span>
+        <div class="gallery-book" aria-label="Powers Mobile Auto Detailing photo gallery">
+          <div class="gallery-spread">
+            <article class="gallery-card active" data-gallery-slide>
+              <img src="assets/gallery/black-truck-exterior-detail.jpg" alt="Black Chevrolet truck after exterior detailing">
+              <div class="gallery-overlay">
+                <p>Black Truck Finish</p>
+                <span>Deep gloss exterior cleanup with tire and trim shine</span>
+              </div>
+            </article>
+            <article class="gallery-card" data-gallery-slide>
+              <img src="assets/gallery/black-sedan-gloss-detail.jpg" alt="Black Cadillac sedan after a gloss exterior detail">
+              <div class="gallery-overlay">
+                <p>Sedan Gloss Detail</p>
+                <span>Clean paint presentation with crisp reflective panels</span>
+              </div>
+            </article>
+            <article class="gallery-card" data-gallery-slide>
+              <img src="assets/gallery/foam-wash-process.jpg" alt="Black sedan covered in foam during wash process">
+              <div class="gallery-overlay">
+                <p>Foam Wash Process</p>
+                <span>Thick soap coverage before rinse and finish work</span>
+              </div>
+            </article>
+            <article class="gallery-card" data-gallery-slide>
+              <img src="assets/gallery/commercial-dump-truck-detail.jpg" alt="Commercial dump truck after exterior cleaning">
+              <div class="gallery-overlay">
+                <p>Work Truck Detail</p>
+                <span>Commercial vehicle cleanup for hard-working equipment</span>
+              </div>
+            </article>
+            <article class="gallery-card" data-gallery-slide>
+              <img src="assets/gallery/black-sprinter-van-detail.jpg" alt="Black Sprinter van after exterior detailing">
+              <div class="gallery-overlay">
+                <p>Fleet Van Shine</p>
+                <span>Large vehicle wash and exterior presentation</span>
+              </div>
+            </article>
+            <article class="gallery-card" data-gallery-slide>
+              <img src="assets/gallery/black-truck-driveway-finish.jpg" alt="Black Chevrolet truck after driveway detail service">
+              <div class="gallery-overlay">
+                <p>Driveway Detail</p>
+                <span>Mobile service brought straight to the customer</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="gallery-controls" aria-label="Gallery controls">
+            <button class="gallery-arrow" type="button" data-gallery-prev aria-label="Previous gallery photo">
+              <span aria-hidden="true">&#8249;</span>
+            </button>
+            <div class="gallery-pages" aria-label="Gallery pages">
+              <button class="active" type="button" data-gallery-page="0" aria-label="Show gallery photo 1"></button>
+              <button type="button" data-gallery-page="1" aria-label="Show gallery photo 2"></button>
+              <button type="button" data-gallery-page="2" aria-label="Show gallery photo 3"></button>
+              <button type="button" data-gallery-page="3" aria-label="Show gallery photo 4"></button>
+              <button type="button" data-gallery-page="4" aria-label="Show gallery photo 5"></button>
+              <button type="button" data-gallery-page="5" aria-label="Show gallery photo 6"></button>
             </div>
-          </article>
-          <article class="gallery-card gallery-two">
-            <div class="gallery-overlay">
-              <p>Gloss Black Finish</p>
-              <span>High-contrast shine with clean paint presentation</span>
-            </div>
-          </article>
-          <article class="gallery-card gallery-three">
-            <div class="gallery-overlay">
-              <p>Family SUV Cleanup</p>
-              <span>Full-service mobile convenience for busy owners</span>
-            </div>
-          </article>
-          <article class="gallery-card gallery-four">
-            <div class="gallery-overlay">
-              <p>Weekend Detail Prep</p>
-              <span>Polished finish ready for events or resale photos</span>
-            </div>
-          </article>
+            <button class="gallery-arrow" type="button" data-gallery-next aria-label="Next gallery photo">
+              <span aria-hidden="true">&#8250;</span>
+            </button>
+          </div>
         </div>
       </section>
     </main>
@@ -108,10 +145,16 @@
       </div>
       <div class="footer-legal">
         <p>&copy; <span id="year"></span> Powers Mobile Auto Detailing. All rights reserved.</p>
-        <nav aria-label="Legal links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-        </nav>
+        <div class="footer-links">
+          <nav aria-label="Legal links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </nav>
+          <nav class="footer-socials" aria-label="Social media links">
+            <a href="#" aria-label="Facebook profile"><span class="facebook-icon" aria-hidden="true">f</span></a>
+            <a href="#" aria-label="Instagram profile"><span class="instagram-icon" aria-hidden="true"></span></a>
+          </nav>
+        </div>
       </div>
     </footer>
   </div>
