@@ -87,7 +87,7 @@ if (
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     const carWidth = homeCarSprite.offsetWidth;
     const passStart = 0;
-    const passDistance = viewportHeight * 0.56;
+    const passDistance = doc.scrollHeight - viewportHeight;
     const passProgress = clamp((scrollTop - passStart) / passDistance, 0, 1);
     const startX = -carWidth - 160;
     const endX = viewportWidth + 180;
@@ -137,17 +137,25 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
   const placeholder = valueEl.textContent;
   const tabs = wrap.querySelectorAll(".service-tab");
   const checkboxes = wrap.querySelectorAll("input[type='checkbox']");
+  const vehicleInput = wrap.querySelector("input[name='vehicle-type']");
+  const vehicleChosen = wrap.querySelector(".vehicle-type-chosen");
+  const vehicleStep = wrap.querySelector(".vehicle-type-step");
+  const autoServiceList = wrap.querySelector(".auto-service-list");
 
   function updateValue() {
+    const vehicle = vehicleInput ? vehicleInput.value : "";
     const selected = [...checkboxes].filter(cb => cb.checked).map(cb => cb.dataset.label);
-    if (selected.length === 0) {
+    if (!vehicle && selected.length === 0) {
       valueEl.textContent = placeholder;
       valueEl.classList.remove("has-selection");
+    } else if (vehicle && selected.length === 0) {
+      valueEl.textContent = vehicle;
+      valueEl.classList.add("has-selection");
     } else if (selected.length === 1) {
-      valueEl.textContent = selected[0];
+      valueEl.textContent = vehicle ? `${vehicle} — ${selected[0]}` : selected[0];
       valueEl.classList.add("has-selection");
     } else {
-      valueEl.textContent = `${selected.length} services selected`;
+      valueEl.textContent = vehicle ? `${vehicle} — ${selected.length} services` : `${selected.length} services selected`;
       valueEl.classList.add("has-selection");
     }
   }
@@ -160,6 +168,41 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
         opts.hidden = opts.dataset.category !== category;
       });
     });
+  });
+
+  wrap.querySelectorAll(".vehicle-type-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const vehicle = btn.dataset.vehicle;
+      const key = btn.dataset.vehicleKey;
+      if (vehicleInput) vehicleInput.value = vehicle;
+      if (vehicleChosen) vehicleChosen.textContent = vehicle;
+      if (vehicleStep) vehicleStep.hidden = true;
+      if (autoServiceList) {
+        autoServiceList.hidden = false;
+        if (key) {
+          const priceAttr = `price${key.charAt(0).toUpperCase()}${key.slice(1)}`;
+          autoServiceList.querySelectorAll(".service-check").forEach(row => {
+            const cb = row.querySelector("input[type='checkbox']");
+            const priceEl = row.querySelector(".check-price");
+            if (!cb || !priceEl) return;
+            const price = cb.dataset[priceAttr];
+            if (price) priceEl.textContent = `$${price}`;
+          });
+        }
+      }
+      updateValue();
+    });
+  });
+
+  wrap.querySelector(".vehicle-type-back")?.addEventListener("click", () => {
+    if (vehicleStep) vehicleStep.hidden = false;
+    if (autoServiceList) autoServiceList.hidden = true;
+    if (vehicleInput) vehicleInput.value = "";
+    if (vehicleChosen) vehicleChosen.textContent = "";
+    wrap.querySelectorAll(".auto-service-list input[type='checkbox']").forEach(cb => {
+      cb.checked = false;
+    });
+    updateValue();
   });
 
   trigger.addEventListener("click", () => {

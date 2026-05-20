@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Powers Mobile Auto Detailing</title>
+  <title>Contact | Powers Mobile Services</title>
   <meta
     name="description"
-    content="Contact Powers Mobile Auto Detailing in Huntsville, Alabama for quotes, service questions, and mobile detailing inquiries."
+    content="Contact Powers Mobile Services in Huntsville, Alabama for quotes, service questions, and mobile detailing inquiries."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,11 +17,11 @@
   <div class="site-shell">
     <header class="hero hero-page">
       <nav class="topbar">
-        <a class="brand" href="index.html" aria-label="Powers Mobile Auto Detailing home">
+        <a class="brand" href="index.html" aria-label="Powers Mobile Services home">
           <span class="brand-mark"><img src="assets/powers-logo-mark.png" alt=""></span>
           <span class="brand-copy">
             <strong>Powers Mobile</strong>
-            <span>Auto Detailing</span>
+            <span>Services</span>
           </span>
         </a>
 
@@ -107,67 +107,130 @@
                     <button type="button" class="service-tab" data-category="home">Home Services</button>
                   </div>
                   <div class="service-options" data-category="auto" hidden>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="exterior-detail" data-label="Exterior Detail">
-                      <span class="check-box"></span>
-                      <span class="check-name">Exterior Detail</span>
-                      <span class="check-price">$75</span>
-                    </label>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="interior-refresh" data-label="Interior Refresh">
-                      <span class="check-box"></span>
-                      <span class="check-name">Interior Refresh</span>
-                      <span class="check-price">$85</span>
-                    </label>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="full-detail" data-label="Full Detail">
-                      <span class="check-box"></span>
-                      <span class="check-name">Full Detail</span>
-                      <span class="check-price">$150</span>
-                    </label>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="seat-shampoo" data-label="Seat Shampooing">
-                      <span class="check-box"></span>
-                      <span class="check-name">Seat Shampooing <span class="check-tag">Add-on</span></span>
-                      <span class="check-price">$50</span>
-                    </label>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="clay-bar" data-label="Clay Bar Treatment">
-                      <span class="check-box"></span>
-                      <span class="check-name">Clay Bar Treatment <span class="check-tag">Add-on</span></span>
-                      <span class="check-price">$65</span>
-                    </label>
-                    <label class="service-check">
-                      <input type="checkbox" name="services" value="wax-coating" data-label="Wax / Protective Coating">
-                      <span class="check-box"></span>
-                      <span class="check-name">Wax / Protective Coating <span class="check-tag">Add-on</span></span>
-                      <span class="check-price">$45</span>
-                    </label>
+                    <div class="vehicle-type-step">
+                      <p class="vehicle-step-label">What type of vehicle?</p>
+                      <div class="vehicle-type-grid">
+                        <button type="button" class="vehicle-type-btn" data-vehicle="Coupe / Sedan" data-vehicle-key="sedan">Coupe / Sedan</button>
+                        <button type="button" class="vehicle-type-btn" data-vehicle="SUV" data-vehicle-key="suv">SUV</button>
+                        <button type="button" class="vehicle-type-btn" data-vehicle="Truck" data-vehicle-key="truck">Truck</button>
+                      </div>
+                    </div>
+                    <div class="auto-service-list" hidden>
+                      <div class="vehicle-type-header">
+                        <button type="button" class="vehicle-type-back">&#8592; Change vehicle</button>
+                        <span class="vehicle-type-chosen"></span>
+                      </div>
+                      <input type="hidden" name="vehicle-type" value="">
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="exterior-detail" data-label="Exterior Detail" data-price-sedan="70" data-price-suv="80" data-price-truck="90">
+                        <span class="check-box"></span>
+                        <span class="check-name">Exterior Detail</span>
+                        <span class="check-price">$70</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="interior-detail" data-label="Interior Detail" data-price-sedan="80" data-price-suv="90" data-price-truck="100">
+                        <span class="check-box"></span>
+                        <span class="check-name">Interior Detail</span>
+                        <span class="check-price">$80</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="buffing" data-label="Buffing" data-price-sedan="80" data-price-suv="90" data-price-truck="100">
+                        <span class="check-box"></span>
+                        <span class="check-name">Buffing <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$80</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="pet-hair-removal" data-label="Pet Hair Removal">
+                        <span class="check-box"></span>
+                        <span class="check-name">Pet Hair Removal <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$50</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="shampooing" data-label="Shampooing">
+                        <span class="check-box"></span>
+                        <span class="check-name">Shampooing <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$60</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="scratch-removal" data-label="Scratch Removal">
+                        <span class="check-box"></span>
+                        <span class="check-name">Scratch Removal <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">Custom</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="spray-on-wax" data-label="Spray On Wax" data-price-sedan="40" data-price-suv="50" data-price-truck="60">
+                        <span class="check-box"></span>
+                        <span class="check-name">Spray On Wax <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$40</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="steaming" data-label="Steaming">
+                        <span class="check-box"></span>
+                        <span class="check-name">Steaming <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$60</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="blow-dry" data-label="Blow Dry">
+                        <span class="check-box"></span>
+                        <span class="check-name">Blow Dry <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$25</span>
+                      </label>
+                      <label class="service-check">
+                        <input type="checkbox" name="services" value="light-restoration" data-label="Light Restoration">
+                        <span class="check-box"></span>
+                        <span class="check-name">Light Restoration <span class="check-tag">Add-on</span></span>
+                        <span class="check-price">$30/light</span>
+                      </label>
+                    </div>
                   </div>
                   <div class="service-options" data-category="home" hidden>
                     <label class="service-check">
-                      <input type="checkbox" name="services" value="driveway-wash" data-label="Driveway &amp; Walkway Pressure Wash">
+                      <input type="checkbox" name="services" value="pressure-washing" data-label="Pressure Washing">
                       <span class="check-box"></span>
-                      <span class="check-name">Driveway &amp; Walkway Pressure Wash</span>
-                      <span class="check-price">$80</span>
+                      <span class="check-name">Pressure Washing</span>
+                      <span class="check-price">Custom</span>
                     </label>
                     <label class="service-check">
-                      <input type="checkbox" name="services" value="house-wash" data-label="House Exterior Soft Wash">
+                      <input type="checkbox" name="services" value="driveways" data-label="Driveways">
                       <span class="check-box"></span>
-                      <span class="check-name">House Exterior Soft Wash</span>
-                      <span class="check-price">$160</span>
+                      <span class="check-name">Driveways</span>
+                      <span class="check-price">Custom</span>
                     </label>
                     <label class="service-check">
-                      <input type="checkbox" name="services" value="deck-clean" data-label="Deck &amp; Patio Cleaning">
+                      <input type="checkbox" name="services" value="porches" data-label="Porches">
                       <span class="check-box"></span>
-                      <span class="check-name">Deck &amp; Patio Cleaning</span>
-                      <span class="check-price">$95</span>
+                      <span class="check-name">Porches</span>
+                      <span class="check-price">Custom</span>
                     </label>
                     <label class="service-check">
-                      <input type="checkbox" name="services" value="fence-clean" data-label="Fence Cleaning">
+                      <input type="checkbox" name="services" value="soft-washing" data-label="Soft Washing">
                       <span class="check-box"></span>
-                      <span class="check-name">Fence Cleaning</span>
-                      <span class="check-price">$70</span>
+                      <span class="check-name">Soft Washing</span>
+                      <span class="check-price">Custom</span>
+                    </label>
+                    <label class="service-check">
+                      <input type="checkbox" name="services" value="sheds" data-label="Sheds">
+                      <span class="check-box"></span>
+                      <span class="check-name">Sheds</span>
+                      <span class="check-price">Custom</span>
+                    </label>
+                    <label class="service-check">
+                      <input type="checkbox" name="services" value="sidewalks" data-label="Sidewalks">
+                      <span class="check-box"></span>
+                      <span class="check-name">Sidewalks</span>
+                      <span class="check-price">Custom</span>
+                    </label>
+                    <label class="service-check">
+                      <input type="checkbox" name="services" value="mailboxes" data-label="Mailboxes">
+                      <span class="check-box"></span>
+                      <span class="check-name">Mailboxes</span>
+                      <span class="check-price">Custom</span>
+                    </label>
+                    <label class="service-check">
+                      <input type="checkbox" name="services" value="fences" data-label="Fences">
+                      <span class="check-box"></span>
+                      <span class="check-name">Fences</span>
+                      <span class="check-price">Custom</span>
                     </label>
                   </div>
                 </div>
@@ -192,11 +255,11 @@
         </div>
         <div class="footer-item">
           <span>Site Operator</span>
-          <p>Developed and hosted by <a href="https://vohostings.com">VOhosting</a></p>
+          <p>Developed and hosted by <a href="https://vohostings.com">VOHostings</a></p>
         </div>
       </div>
       <div class="footer-legal">
-        <p>&copy; <span id="year"></span> Powers Mobile Auto Detailing. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Powers Mobile Services. All rights reserved.</p>
         <div class="footer-links">
           <nav aria-label="Legal links">
             <a href="privacy.html">Privacy Policy</a>

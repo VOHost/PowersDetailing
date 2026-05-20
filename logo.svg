@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 530">
+  <defs>
+    <linearGradient id="silverShield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#ECEFF1"/>
+      <stop offset="22%"  stop-color="#CFD8DC"/>
+      <stop offset="50%"  stop-color="#FFFFFF"/>
+      <stop offset="78%"  stop-color="#90A4AE"/>
+      <stop offset="100%" stop-color="#ECEFF1"/>
+    </linearGradient>
+    <linearGradient id="shieldDark" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%"   stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#050d18"/>
+    </linearGradient>
+    <linearGradient id="blueAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#87CEEB"/>
+      <stop offset="50%"  stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <linearGradient id="carWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="55%"  stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="whiteText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="45%"  stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#78909C"/>
+    </linearGradient>
+    <linearGradient id="wheelRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.75)"/>
+    </filter>
+    <filter id="txtShadow">
+      <feDropShadow dx="3" dy="4" stdDeviation="5" flood-color="rgba(0,0,0,0.95)"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="530" fill="#080808"/>
+  <circle cx="250" cy="268" r="232" fill="#101010"/>
+  <circle cx="250" cy="268" r="230" fill="none" stroke="#1c2433" stroke-width="2"/>
+
+  <!-- Silver shield outer -->
+  <polygon points="145,88 355,88 448,198 448,348 340,438 250,480 160,438 52,348 52,198"
+           fill="url(#silverShield)" filter="url(#shadow)"/>
+  <!-- Shield dark inner -->
+  <polygon points="157,104 343,104 434,206 434,340 328,424 250,463 172,424 66,340 66,206"
+           fill="url(#shieldDark)"/>
+  <!-- Shield inner blue accent border -->
+  <polygon points="157,104 343,104 434,206 434,340 328,424 250,463 172,424 66,340 66,206"
+           fill="none" stroke="#29B6F6" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- ===== 5 STARS ===== -->
+  <!-- Left small -->
+  <polygon points="152,143 155,153 166,153 157,160 161,170 152,163 143,170 147,160 138,153 149,153"
+           fill="url(#blueAccent)" filter="url(#shadow)"/>
+  <!-- Left medium -->
+  <polygon points="196,118 200,132 215,132 203,142 208,156 196,148 184,156 189,142 177,132 192,132"
+           fill="url(#blueAccent)" filter="url(#shadow)"/>
+  <!-- Center large -->
+  <polygon points="250,93 257,116 280,116 262,130 269,152 250,138 231,152 238,130 220,116 243,116"
+           fill="url(#blueAccent)" filter="url(#shadow)"/>
+  <!-- Right medium -->
+  <polygon points="304,118 308,132 323,132 311,142 316,156 304,148 292,156 297,142 285,132 300,132"
+           fill="url(#blueAccent)" filter="url(#shadow)"/>
+  <!-- Right small -->
+  <polygon points="348,143 351,153 362,153 353,160 357,170 348,163 339,170 343,160 334,153 345,153"
+           fill="url(#blueAccent)" filter="url(#shadow)"/>
+
+  <!-- ===== HOUSE ROOFLINES ===== -->
+  <!-- Background depth peaks (silver) -->
+  <polyline points="88,236 168,158 248,236" fill="none" stroke="#78909C" stroke-width="4" stroke-linejoin="round" opacity="0.5"/>
+  <polyline points="252,236 332,158 412,236" fill="none" stroke="#78909C" stroke-width="4" stroke-linejoin="round" opacity="0.5"/>
+
+  <!-- Left house roof -->
+  <polygon points="90,236 170,160 248,236" fill="url(#blueAccent)"/>
+  <polyline points="90,236 170,160 248,236" fill="none" stroke="#CFD8DC" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="108" y="234" width="124" height="55" fill="#0a1520" opacity="0.95"/>
+  <rect x="120" y="242" width="24" height="20" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="132" y1="242" x2="132" y2="262" stroke="white" stroke-width="1.5"/>
+  <line x1="120" y1="252" x2="144" y2="252" stroke="white" stroke-width="1.5"/>
+  <rect x="174" y="242" width="24" height="20" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="186" y1="242" x2="186" y2="262" stroke="white" stroke-width="1.5"/>
+  <line x1="174" y1="252" x2="198" y2="252" stroke="white" stroke-width="1.5"/>
+
+  <!-- Center house roof (tallest) -->
+  <polygon points="140,240 250,130 360,240" fill="url(#blueAccent)"/>
+  <polyline points="140,240 250,130 360,240" fill="none" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Dormer peak -->
+  <polygon points="222,206 250,170 278,206" fill="url(#blueAccent)"/>
+  <polyline points="222,206 250,170 278,206" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="152" y="238" width="196" height="56" fill="#08111e" opacity="0.95"/>
+  <!-- Door -->
+  <rect x="232" y="258" width="36" height="38" rx="2" fill="url(#blueAccent)" opacity="0.8"/>
+  <circle cx="263" cy="278" r="2.5" fill="white"/>
+  <!-- Windows -->
+  <rect x="164" y="248" width="28" height="22" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="178" y1="248" x2="178" y2="270" stroke="white" stroke-width="1.5"/>
+  <line x1="164" y1="259" x2="192" y2="259" stroke="white" stroke-width="1.5"/>
+  <rect x="308" y="248" width="28" height="22" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="322" y1="248" x2="322" y2="270" stroke="white" stroke-width="1.5"/>
+  <line x1="308" y1="259" x2="336" y2="259" stroke="white" stroke-width="1.5"/>
+
+  <!-- Right house roof -->
+  <polygon points="252,236 332,160 410,236" fill="url(#blueAccent)"/>
+  <polyline points="252,236 332,160 410,236" fill="none" stroke="#CFD8DC" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="268" y="234" width="124" height="55" fill="#0a1520" opacity="0.95"/>
+  <rect x="282" y="242" width="24" height="20" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="294" y1="242" x2="294" y2="262" stroke="white" stroke-width="1.5"/>
+  <line x1="282" y1="252" x2="306" y2="252" stroke="white" stroke-width="1.5"/>
+  <rect x="336" y="242" width="24" height="20" rx="1" fill="url(#blueAccent)" opacity="0.9"/>
+  <line x1="348" y1="242" x2="348" y2="262" stroke="white" stroke-width="1.5"/>
+  <line x1="336" y1="252" x2="360" y2="252" stroke="white" stroke-width="1.5"/>
+
+  <!-- ===== SPORTS CAR (facing left) ===== -->
+  <!-- Shadow -->
+  <ellipse cx="262" cy="350" rx="168" ry="10" fill="#0277BD" opacity="0.22"/>
+
+  <!-- Body silhouette -->
+  <path d="M 96,300
+           C 92,282 98,270 112,265
+           C 126,260 142,258 156,258
+           C 168,258 178,262 184,267
+           L 188,253
+           L 206,234
+           L 298,230
+           L 318,244
+           L 330,258
+           L 350,256
+           C 364,254 378,252 390,257
+           C 404,262 420,274 426,292
+           L 428,320
+           L 428,344
+           L 98,344
+           L 95,320
+           Z"
+        fill="url(#carWhite)" filter="url(#shadow)"/>
+
+  <!-- Window (dark) -->
+  <path d="M 192,255 L 208,235 L 298,230 L 317,244 L 330,258 L 200,258 Z"
+        fill="#060e1a"/>
+
+  <!-- Window highlights -->
+  <line x1="212" y1="237" x2="244" y2="231" stroke="white" stroke-width="1.5" opacity="0.45"/>
+  <line x1="284" y1="230" x2="313" y2="241" stroke="white" stroke-width="1.2" opacity="0.4"/>
+
+  <!-- Body crease / character line -->
+  <path d="M 115,270 C 178,267 246,265 318,261 C 362,259 398,264 426,278"
+        fill="none" stroke="white" stroke-width="1.8" opacity="0.5"/>
+
+  <!-- Rear spoiler -->
+  <rect x="350" y="244" width="38" height="5"  rx="2.5" fill="url(#carWhite)"/>
+  <rect x="352" y="249" width="3.5" height="9" rx="1.5" fill="url(#carWhite)"/>
+  <rect x="382" y="249" width="3.5" height="9" rx="1.5" fill="url(#carWhite)"/>
+
+  <!-- Headlight -->
+  <path d="M 95,290 C 88,288 85,298 90,305 L 96,303 Z" fill="#E3F2FD" opacity="0.95"/>
+
+  <!-- Taillight -->
+  <rect x="426" y="298" width="5" height="16" rx="2" fill="#B3E5FC" opacity="0.9"/>
+
+  <!-- Side mirror -->
+  <path d="M 322,254 L 345,250 L 345,261 L 324,263 Z" fill="url(#carWhite)"/>
+
+  <!-- Exhaust -->
+  <ellipse cx="416" cy="344" rx="5.5" ry="3" fill="#81D4FA" opacity="0.75"/>
+  <ellipse cx="428" cy="344" rx="4.5" ry="3" fill="#4FC3F7" opacity="0.6"/>
+
+  <!-- Front splitter -->
+  <rect x="86" y="334" width="18" height="4" rx="2" fill="url(#carWhite)" opacity="0.8"/>
+
+  <!-- FRONT WHEEL -->
+  <circle cx="174" cy="344" r="42" fill="#050c17"/>
+  <circle cx="174" cy="344" r="30" fill="url(#wheelRim)"/>
+  <line x1="174" y1="314" x2="174" y2="374" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="144" y1="319" x2="204" y2="369" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="144" y1="369" x2="204" y2="319" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="140" y1="336" x2="208" y2="352" stroke="#29B6F6" stroke-width="2.2" opacity="0.5"/>
+  <line x1="141" y1="354" x2="207" y2="334" stroke="#29B6F6" stroke-width="2.2" opacity="0.5"/>
+  <circle cx="174" cy="344" r="9"   fill="#29B6F6"/>
+  <circle cx="174" cy="344" r="4.5" fill="white"/>
+  <path d="M 155,336 Q 150,344 155,352" fill="none" stroke="#0288D1" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- REAR WHEEL -->
+  <circle cx="362" cy="344" r="42" fill="#050c17"/>
+  <circle cx="362" cy="344" r="30" fill="url(#wheelRim)"/>
+  <line x1="362" y1="314" x2="362" y2="374" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="332" y1="319" x2="392" y2="369" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="332" y1="369" x2="392" y2="319" stroke="#29B6F6" stroke-width="3.5"/>
+  <line x1="328" y1="336" x2="396" y2="352" stroke="#29B6F6" stroke-width="2.2" opacity="0.5"/>
+  <line x1="329" y1="354" x2="395" y2="334" stroke="#29B6F6" stroke-width="2.2" opacity="0.5"/>
+  <circle cx="362" cy="344" r="9"   fill="#29B6F6"/>
+  <circle cx="362" cy="344" r="4.5" fill="white"/>
+  <path d="M 343,336 Q 338,344 343,352" fill="none" stroke="#0288D1" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Shine sparkles -->
+  <path d="M 264,227 L 267,221 L 270,227 L 267,233 Z" fill="white" opacity="0.8"/>
+  <path d="M 346,250 L 349,245 L 352,250 L 349,255 Z" fill="white" opacity="0.6"/>
+  <path d="M 433,284 L 437,277 L 441,284 L 437,291 Z" fill="white" opacity="0.65"/>
+  <path d="M 436,190 L 439,183 L 442,190 L 439,197 Z" fill="white" opacity="0.45"/>
+
+  <!-- ===== DETAILING SPRAY GUN (lower left) ===== -->
+  <g transform="translate(66,298) rotate(-28)">
+    <rect x="0"  y="5"  width="54" height="14" rx="4" fill="url(#blueAccent)"/>
+    <rect x="50" y="7"  width="28" height="10" rx="3" fill="#B0BEC5"/>
+    <rect x="11" y="17" width="13" height="28"  rx="4" fill="url(#blueAccent)"/>
+    <path d="M 26,19 L 32,28 L 20,28 Z" fill="#CFD8DC"/>
+    <path d="M 78,10 L 84,12 L 84,15 L 78,17 Z" fill="white"/>
+    <line x1="85" y1="10" x2="97" y2="5"  stroke="#81D4FA" stroke-width="1.8" opacity="0.85"/>
+    <line x1="85" y1="13" x2="99" y2="13" stroke="#81D4FA" stroke-width="1.8" opacity="0.85"/>
+    <line x1="85" y1="16" x2="97" y2="21" stroke="#81D4FA" stroke-width="1.8" opacity="0.85"/>
+    <circle cx="99" cy="4"  r="2.5" fill="#4FC3F7" opacity="0.8"/>
+    <circle cx="102" cy="13" r="3" fill="#29B6F6" opacity="0.9"/>
+    <circle cx="99" cy="22" r="2.5" fill="#4FC3F7" opacity="0.8"/>
+    <path d="M 15,43 C 20,60 8,70 -4,78" fill="none" stroke="#0288D1" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== TEXT ===== -->
+  <text x="250" y="412"
+        text-anchor="middle"
+        font-family="'Arial Black', Impact, 'Helvetica Neue', sans-serif"
+        font-size="78" font-weight="900"
+        fill="url(#whiteText)"
+        filter="url(#txtShadow)"
+        letter-spacing="4">POWERS</text>
+
+  <text x="250" y="456"
+        text-anchor="middle"
+        font-family="Georgia, 'Palatino Linotype', serif"
+        font-size="28" font-style="italic" font-weight="bold"
+        fill="url(#blueAccent)"
+        filter="url(#txtShadow)"
+        letter-spacing="1">Detailing Services</text>
+
+  <!-- Shield bottom diamond accent -->
+  <polygon points="241,468 250,482 259,468" fill="url(#silverShield)" opacity="0.85"/>
+
+  <!-- Side shield sparkles -->
+  <path d="M 80,215 L 83,207 L 86,215 L 83,223 Z" fill="white" opacity="0.4"/>
+  <path d="M 414,215 L 417,207 L 420,215 L 417,223 Z" fill="white" opacity="0.4"/>
+</svg>
