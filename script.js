@@ -1,3 +1,5 @@
+const WEB3FORMS_KEY = "18fca95c-44ad-4ddf-b722-5aa491ed6024";
+
 const menuToggle = document.querySelector(".menu-toggle");
 const navWrap = document.querySelector(".nav-wrap");
 const navLinks = document.querySelectorAll(".nav-wrap a");
@@ -131,6 +133,127 @@ function closeAllServiceDropdowns(except) {
   });
 }
 
+// ─── Date picker — weekday restriction + availability ────────────────
+const dateInput = document.getElementById("preferred-date");
+const dateNote = document.getElementById("date-note");
+const slotNote = document.getElementById("slot-note");
+
+if (dateInput && typeof flatpickr !== "undefined") {
+  flatpickr(dateInput, {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    disable: [
+      function(date) {
+        return date.getDay() === 0; // block Sundays
+      }
+    ],
+    onChange: function(selectedDates, dateStr) {
+      if (dateNote) dateNote.hidden = true;
+      if (dateStr) fetchAvailability(dateStr);
+    },
+    onReady: function(selectedDates, dateStr, instance) {
+      instance.calendarContainer?.classList.add("powers-cal");
+    }
+  });
+}
+
+async function fetchAvailability(date) {
+  if (slotNote) {
+    slotNote.textContent = "Checking availability…";
+    slotNote.className = "slot-note";
+  }
+
+  try {
+    const res = await fetch(`/api/availability?date=${date}`);
+    const data = await res.json();
+    const booked = data.booked || [];
+    updateTimeSlotAvailability(booked);
+
+    if (slotNote) {
+      const allSlots = ["8:00 AM", "11:00 AM", "2:00 PM", "5:00 PM"];
+      const remaining = allSlots.filter(t => !booked.includes(t)).length;
+      slotNote.className = "slot-note";
+      slotNote.textContent = remaining < 4 && remaining > 0
+        ? `${remaining} of 4 slots still open on this date.`
+        : remaining === 0
+          ? "This date is fully booked. Please choose another."
+          : "";
+    }
+  } catch {
+    if (slotNote) slotNote.textContent = "";
+    clearTimeSlotAvailability();
+  }
+}
+
+function updateTimeSlotAvailability(bookedTimes) {
+  document.querySelectorAll(".time-slot").forEach(label => {
+    const radio = label.querySelector("input[type='radio']");
+    if (!radio) return;
+    const isBooked = bookedTimes.includes(radio.value);
+    label.classList.toggle("time-slot-booked", isBooked);
+    radio.disabled = isBooked;
+    if (isBooked && radio.checked) radio.checked = false;
+  });
+}
+
+function clearTimeSlotAvailability() {
+  document.querySelectorAll(".time-slot").forEach(label => {
+    label.classList.remove("time-slot-booked");
+    const radio = label.querySelector("input[type='radio']");
+    if (radio) radio.disabled = false;
+  });
+  if (slotNote) slotNote.textContent = "";
+}
+
+// ─── Live price calculator ───────────────────────────────────────────
+function updateTotal() {
+  const totalEl = document.getElementById("booking-total");
+  const amountEl = document.getElementById("booking-total-amount");
+  if (!totalEl || !amountEl || !contactForm) return;
+
+  const vehicleInput = contactForm.querySelector("input[name='vehicle-type']");
+  const vehicleKey = vehicleInput ? vehicleInput.value : "";
+  const checkedBoxes = [...contactForm.querySelectorAll("input[name='services']:checked")];
+
+  if (checkedBoxes.length === 0) {
+    totalEl.hidden = true;
+    return;
+  }
+
+  let total = 0;
+  let hasCustom = false;
+
+  checkedBoxes.forEach(cb => {
+    let price = null;
+    if (vehicleKey) {
+      const attr = `price${vehicleKey.charAt(0).toUpperCase()}${vehicleKey.slice(1)}`;
+      price = cb.dataset[attr];
+    }
+    if (price) {
+      total += parseFloat(price);
+    } else {
+      const priceEl = cb.closest(".service-check")?.querySelector(".check-price");
+      const priceText = priceEl ? priceEl.textContent.trim() : "";
+      if (priceText === "Custom" || priceText === "Custom Quote") {
+        hasCustom = true;
+      } else {
+        const num = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+        if (!isNaN(num)) total += num;
+      }
+    }
+  });
+
+  totalEl.hidden = false;
+  if (total === 0 && hasCustom) {
+    amountEl.textContent = "Custom Quote";
+  } else if (total > 0 && hasCustom) {
+    amountEl.textContent = `$${total} + Custom`;
+  } else {
+    amountEl.textContent = `$${total}`;
+  }
+}
+
+// ─── Service selector ────────────────────────────────────────────────
 document.querySelectorAll(".service-select-wrap").forEach(wrap => {
   const trigger = wrap.querySelector(".service-select-trigger");
   const valueEl = wrap.querySelector(".service-select-value");
@@ -152,10 +275,10 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
       valueEl.textContent = vehicle;
       valueEl.classList.add("has-selection");
     } else if (selected.length === 1) {
-      valueEl.textContent = vehicle ? `${vehicle} — ${selected[0]}` : selected[0];
+      valueEl.textContent = vehicle ? `${vehicle}: ${selected[0]}` : selected[0];
       valueEl.classList.add("has-selection");
     } else {
-      valueEl.textContent = vehicle ? `${vehicle} — ${selected.length} services` : `${selected.length} services selected`;
+      valueEl.textContent = vehicle ? `${vehicle}: ${selected.length} services` : `${selected.length} services selected`;
       valueEl.classList.add("has-selection");
     }
   }
@@ -191,6 +314,7 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
         }
       }
       updateValue();
+      updateTotal();
     });
   });
 
@@ -203,6 +327,7 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
       cb.checked = false;
     });
     updateValue();
+    updateTotal();
   });
 
   trigger.addEventListener("click", () => {
@@ -214,7 +339,10 @@ document.querySelectorAll(".service-select-wrap").forEach(wrap => {
     }
   });
 
-  checkboxes.forEach(cb => cb.addEventListener("change", updateValue));
+  checkboxes.forEach(cb => cb.addEventListener("change", () => {
+    updateValue();
+    updateTotal();
+  }));
 });
 
 document.addEventListener("click", (e) => {
@@ -223,20 +351,94 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// ─── Form submission — claim slot then send via Web3Forms ────────────
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const button = contactForm.querySelector("button");
+    const button = contactForm.querySelector("button[type='submit']");
+    const originalText = button ? button.textContent : "";
 
     if (button) {
-      const originalText = button.textContent;
-      button.textContent = "Inquiry Ready";
+      button.textContent = "Sending…";
       button.disabled = true;
+    }
 
-      window.setTimeout(() => {
+    const dateVal = contactForm.querySelector("input[name='preferred-date']")?.value;
+    const timeVal = contactForm.querySelector("input[name='preferred-time']:checked")?.value;
+
+    // If both date and time are selected, atomically claim the slot first
+    if (dateVal && timeVal) {
+      try {
+        const bookRes = await fetch("/api/book", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ date: dateVal, time: timeVal })
+        });
+        const bookData = await bookRes.json();
+
+        if (!bookData.success) {
+          if (button) {
+            button.textContent = originalText;
+            button.disabled = false;
+          }
+          if (slotNote) {
+            slotNote.textContent = bookData.error || "That time is no longer available. Please choose another.";
+            slotNote.className = "slot-note slot-error";
+          }
+          fetchAvailability(dateVal);
+          return;
+        }
+      } catch {
+        if (button) {
+          button.textContent = originalText;
+          button.disabled = false;
+        }
+        if (slotNote) {
+          slotNote.textContent = "Booking failed. Please try again.";
+          slotNote.className = "slot-note slot-error";
+        }
+        return;
+      }
+    }
+
+    // Slot claimed (or no date/time selected) — send inquiry via Web3Forms
+    const formData = new FormData(contactForm);
+    formData.append("access_key", WEB3FORMS_KEY);
+    formData.append("subject", "New Booking Request: Powers Mobile Services");
+    formData.append("from_name", "Powers Mobile Services Website");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      if (button) {
+        if (data.success) {
+          button.textContent = "Inquiry Sent!";
+          contactForm.reset();
+          const valueEl = contactForm.querySelector(".service-select-value");
+          if (valueEl) {
+            valueEl.textContent = "Choose a category...";
+            valueEl.classList.remove("has-selection");
+          }
+          const wrap = contactForm.querySelector(".service-select-wrap");
+          if (wrap) wrap.removeAttribute("data-open");
+          const totalEl = document.getElementById("booking-total");
+          if (totalEl) totalEl.hidden = true;
+          clearTimeSlotAvailability();
+          if (slotNote) slotNote.textContent = "";
+        } else {
+          button.textContent = originalText;
+          button.disabled = false;
+        }
+      }
+    } catch {
+      if (button) {
         button.textContent = originalText;
         button.disabled = false;
-      }, 1800);
+      }
     }
   });
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Powers Mobile Services</title>
+  <title>Book | Powers Mobile Services</title>
   <meta
     name="description"
     content="Contact Powers Mobile Services in Huntsville, Alabama for quotes, service questions, and mobile detailing inquiries."
@@ -12,8 +12,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
-<body data-page="contact">
+<body data-page="book">
   <div class="site-shell">
     <header class="hero hero-page">
       <nav class="topbar">
@@ -45,13 +46,13 @@
           <a href="about.html" data-nav="about">About</a>
           <a href="gallery.html" data-nav="gallery">Gallery</a>
           <a href="testimonials.html" data-nav="testimonials">Testimonials</a>
-          <a href="contact.html" data-nav="contact">Contact</a>
+          <a href="book.html" data-nav="book">Book</a>
           <a class="nav-cta" href="tel:2563485809">Call Now</a>
         </div>
       </nav>
 
       <div class="page-hero-content">
-        <p class="eyebrow">Contact</p>
+        <p class="eyebrow">Book</p>
         <h1>Get a quote in minutes.</h1>
         <p class="page-intro">
           Select the services you need, leave your info, and we'll reach out to schedule at a time that works for you.
@@ -63,8 +64,8 @@
       <section class="section">
         <div class="contact-panel">
           <div class="contact-copy">
-            <p class="eyebrow">Contact Us</p>
-            <h2>We come to you — anywhere in Huntsville.</h2>
+            <p class="eyebrow">Book Now</p>
+            <h2>We come to you, anywhere in Huntsville.</h2>
             <p>
               Fill out the form with the services you're interested in and we'll get back to you fast with availability and a final quote.
             </p>
@@ -77,6 +78,14 @@
                 <span>Owner</span>
                 Joshua Powers
               </div>
+            </div>
+
+            <div class="booking-total" id="booking-total" hidden>
+              <div class="booking-total-row">
+                <span class="booking-total-label">Estimated Total</span>
+                <span class="booking-total-amount" id="booking-total-amount">$0</span>
+              </div>
+              <p class="booking-total-note">Home services and items marked "Custom" are quoted separately. Final price confirmed when we reach out.</p>
             </div>
           </div>
 
@@ -93,6 +102,23 @@
               Email Address
               <input type="email" name="email" placeholder="you@example.com">
             </label>
+
+            <label>
+              Preferred Date <span class="field-optional">optional, Mon through Sat</span>
+              <input type="date" name="preferred-date" id="preferred-date">
+            </label>
+            <p class="slot-note slot-error" id="date-note" hidden>Sundays are not available. Please select a Monday through Saturday date.</p>
+
+            <div class="form-group">
+              Preferred Time <span class="field-optional">optional</span>
+              <div class="time-slot-grid">
+                <label class="time-slot"><input type="radio" name="preferred-time" value="8:00 AM"><span>8:00 AM</span></label>
+                <label class="time-slot"><input type="radio" name="preferred-time" value="11:00 AM"><span>11:00 AM</span></label>
+                <label class="time-slot"><input type="radio" name="preferred-time" value="2:00 PM"><span>2:00 PM</span></label>
+                <label class="time-slot"><input type="radio" name="preferred-time" value="5:00 PM"><span>5:00 PM</span></label>
+              </div>
+              <p class="slot-note" id="slot-note"></p>
+            </div>
 
             <div class="form-group">
               Services
@@ -274,6 +300,7 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -2315,6 +2315,205 @@ h3 {
   }
 }
 
+/* ─── Home services hero ─────────────────────────────────────────── */
+.hero-home-svc {
+  background-image: url('assets/home-services-hero.jpg');
+  background-size: cover;
+  background-position: center 55%;
+  padding-bottom: 42px;
+}
+
+.hero-home-svc::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(6, 14, 30, 0.78) 0%,
+    rgba(6, 14, 30, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-home-svc .page-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-home-svc h1 {
+  color: #ffffff;
+}
+
+.hero-home-svc .eyebrow {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-home-svc .page-intro {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ─── Flatpickr calendar overrides ──────────────────────────────── */
+.flatpickr-calendar {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  font-family: "Inter", sans-serif;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.flatpickr-day:hover {
+  background: var(--panel-blue);
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+  color: rgba(8, 81, 137, 0.2);
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+  fill: var(--blue);
+}
+
+/* ─── Field optional label ───────────────────────────────────────── */
+.field-optional {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 4px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ─── Time slot picker ───────────────────────────────────────────── */
+.time-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.time-slot {
+  position: relative;
+}
+
+.time-slot input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.time-slot span {
+  display: block;
+  padding: 11px 6px;
+  text-align: center;
+  border: 1px solid rgba(8, 81, 137, 0.18);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--panel);
+  color: var(--ink-2);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.time-slot input:checked + span {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.time-slot span:hover {
+  border-color: rgba(8, 120, 217, 0.5);
+  background: rgba(8, 120, 217, 0.06);
+}
+
+.time-slot input:checked + span:hover {
+  background: var(--blue);
+}
+
+.time-slot.time-slot-booked span {
+  opacity: 0.38;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.time-slot.time-slot-booked input:checked + span {
+  background: var(--panel);
+  border-color: rgba(8, 81, 137, 0.18);
+  color: var(--muted);
+}
+
+/* ─── Slot availability notes ────────────────────────────────────── */
+.slot-note {
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin: 6px 0 0;
+  min-height: 1.1em;
+}
+
+.slot-note.slot-error {
+  color: #c0392b;
+}
+
+/* ─── Live price calculator ──────────────────────────────────────── */
+.booking-total {
+  background: linear-gradient(135deg, var(--panel-blue) 0%, rgba(8, 120, 217, 0.04) 100%);
+  border: 1px solid rgba(8, 120, 217, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-top: 20px;
+}
+
+.booking-total-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.booking-total-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.booking-total-amount {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+}
+
+.booking-total-note {
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+@media (max-width: 600px) {
+  .time-slot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-home-svc,
+  .hero-auto {
+    padding-bottom: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-car-sprite,
   .home-car-smoke,
