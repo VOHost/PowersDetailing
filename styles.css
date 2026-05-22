@@ -57,6 +57,8 @@ textarea {
 }
 
 .site-shell {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
 }
 
@@ -321,8 +323,8 @@ h3 {
 }
 
 h1 {
-  max-width: 14ch;
-  font-size: clamp(3.1rem, 6vw, 5.9rem);
+  max-width: 18ch;
+  font-size: clamp(3.05rem, 5.35vw, 5.2rem);
 }
 
 h2 {
@@ -445,6 +447,17 @@ h3 {
   gap: 16px;
 }
 
+@media (min-width: 1101px) {
+  .hero-panel {
+    align-self: stretch;
+  }
+
+  .hero-panel .panel-card {
+    position: sticky;
+    top: 116px;
+  }
+}
+
 .panel-card {
   min-height: 410px;
   padding: 32px;
@@ -515,29 +528,78 @@ h3 {
 }
 
 .home-car-pass {
-  --car-x: -54vw;
-  --car-y: 62vh;
-  --car-opacity: 0;
-  --smoke-x: -58vw;
-  --smoke-y: 64vh;
-  --smoke-opacity: 0;
-  --shine-opacity: 0;
+  --car-pass-y: 64vh;
+  --car-pass-duration: 900ms;
   position: fixed;
   inset: 0;
-  z-index: 24;
+  z-index: 18;
   overflow: hidden;
   pointer-events: none;
+}
+
+.home-car-pass.has-run {
+  display: none;
 }
 
 .home-car-sprite {
   position: absolute;
   left: 0;
   top: 0;
-  width: clamp(480px, 72vw, 1200px);
+  width: clamp(430px, 62vw, 980px);
   z-index: 2;
-  opacity: var(--car-opacity);
-  transform: translate3d(var(--car-x), var(--car-y), 0);
+  opacity: 0;
+  transform: translate3d(-120%, var(--car-pass-y), 0);
   will-change: transform, opacity;
+}
+
+.home-car-pass.is-running .home-car-sprite {
+  animation: homeCarAutoSwipe var(--car-pass-duration) cubic-bezier(0.12, 0.78, 0.28, 1) forwards;
+}
+
+.home-car-sprite::before,
+.home-car-sprite::after {
+  position: absolute;
+  content: "";
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.home-car-sprite::before {
+  inset: 12% 12% 30% 10%;
+  background:
+    linear-gradient(106deg, transparent 31%, rgba(255, 255, 255, 0.82) 43%, rgba(204, 244, 255, 0.38) 47%, transparent 62%),
+    linear-gradient(8deg, transparent 38%, rgba(255, 255, 255, 0.46) 45%, transparent 55%),
+    linear-gradient(-5deg, transparent 54%, rgba(255, 255, 255, 0.38) 60%, transparent 70%);
+  filter: blur(5px) drop-shadow(0 0 10px rgba(255, 255, 255, 0.54));
+  mask-image: radial-gradient(ellipse at 50% 52%, #000 0 38%, transparent 74%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 52%, #000 0 38%, transparent 74%);
+  mix-blend-mode: screen;
+  transform: translateX(-34%) skewX(-12deg);
+}
+
+.home-car-sprite::after {
+  top: 29%;
+  left: 58%;
+  width: clamp(34px, 4vw, 64px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 1) 0 8%, rgba(255, 255, 255, 0.45) 13% 22%, transparent 44%),
+    conic-gradient(from 45deg, transparent 0 18%, rgba(255, 255, 255, 0.96) 22% 28%, transparent 34% 68%, rgba(255, 255, 255, 0.9) 72% 78%, transparent 84% 100%);
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 18px rgba(157, 231, 255, 0.72));
+  transform: rotate(18deg) scale(0.78);
+  mix-blend-mode: screen;
+}
+
+.home-car-pass.is-running .home-car-sprite::before {
+  animation: homeCarGleamSweep var(--car-pass-duration) ease-out forwards;
+}
+
+.home-car-pass.is-running .home-car-sprite::after {
+  animation: homeCarGlistenPop var(--car-pass-duration) ease-out forwards;
 }
 
 .home-car-sprite img {
@@ -550,11 +612,11 @@ h3 {
 
 .home-car-shine {
   position: absolute;
-  top: 21%;
-  left: 42%;
-  width: clamp(54px, 9vw, 112px);
+  top: 23%;
+  left: 49%;
+  width: clamp(30px, 4.5vw, 64px);
   aspect-ratio: 1;
-  opacity: var(--shine-opacity);
+  opacity: 0;
   border-radius: 999px;
   background:
     radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 7%, rgba(255, 255, 255, 0.42) 9% 18%, transparent 42%),
@@ -562,9 +624,13 @@ h3 {
   filter:
     blur(0.2px)
     drop-shadow(0 0 14px rgba(255, 255, 255, 0.94))
-    drop-shadow(0 0 20px rgba(0, 144, 255, 0.58));
+    drop-shadow(0 0 18px rgba(157, 231, 255, 0.56));
   mix-blend-mode: screen;
   transform: rotate(18deg) scale(0.98);
+}
+
+.home-car-pass.is-running .home-car-shine {
+  animation: homeCarShineFlash var(--car-pass-duration) ease-out forwards;
 }
 
 .home-car-shine::before,
@@ -589,7 +655,7 @@ h3 {
   display: block;
   width: 34px;
   height: 34px;
-  opacity: var(--shine-opacity);
+  opacity: 0;
   background: #ffffff;
   clip-path: polygon(50% 0, 60% 38%, 100% 50%, 60% 62%, 50% 100%, 40% 62%, 0 50%, 40% 38%);
   filter:
@@ -598,28 +664,36 @@ h3 {
   transform: rotate(18deg) scale(1);
 }
 
+.home-car-pass.is-running .home-car-spark {
+  animation: homeCarSparkFlash var(--car-pass-duration) ease-out forwards;
+}
+
 .spark-one {
-  top: 14%;
-  left: 58%;
+  top: 18%;
+  left: 64%;
 }
 
 .spark-two {
-  top: 34%;
-  left: 76%;
-  width: 24px;
-  height: 24px;
+  top: 42%;
+  left: 34%;
+  width: 22px;
+  height: 22px;
 }
 
 .home-car-smoke {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 1;
-  width: clamp(360px, 40vw, 690px);
-  height: clamp(170px, 22vw, 330px);
-  opacity: var(--smoke-opacity);
-  transform: translate3d(var(--smoke-x), var(--smoke-y), 0);
+  z-index: 4;
+  width: clamp(190px, 21vw, 350px);
+  height: clamp(120px, 14vw, 210px);
+  opacity: 0;
+  transform: translate3d(-112%, calc(var(--car-pass-y) + 8vh), 0);
   will-change: transform, opacity;
+}
+
+.home-car-pass.is-running .home-car-smoke {
+  animation: homeCarSmokeTrail var(--car-pass-duration) cubic-bezier(0.12, 0.78, 0.28, 1) forwards;
 }
 
 .home-car-smoke::before,
@@ -627,66 +701,184 @@ h3 {
   position: absolute;
   content: "";
   border-radius: 999px;
-  filter: blur(20px);
+  filter: blur(11px);
 }
 
 .home-car-smoke::before {
-  left: 7%;
-  bottom: 13%;
-  width: 72%;
-  height: 48%;
+  left: 3%;
+  bottom: 18%;
+  width: 82%;
+  height: 56%;
   background:
-    radial-gradient(circle at 20% 60%, rgba(255, 255, 255, 0.88) 0 28%, transparent 46%),
-    radial-gradient(circle at 48% 42%, rgba(234, 239, 243, 0.86) 0 30%, transparent 50%),
-    radial-gradient(circle at 72% 64%, rgba(255, 255, 255, 0.78) 0 25%, transparent 49%);
-  box-shadow: -42px -18px 58px rgba(255, 255, 255, 0.58);
+    radial-gradient(circle at 18% 62%, rgba(255, 255, 255, 0.95) 0 22%, transparent 45%),
+    radial-gradient(circle at 45% 38%, rgba(202, 208, 214, 0.92) 0 26%, transparent 54%),
+    radial-gradient(circle at 72% 58%, rgba(246, 248, 250, 0.88) 0 20%, transparent 47%);
+  box-shadow: -20px -10px 30px rgba(118, 128, 137, 0.18);
 }
 
 .home-car-smoke::after {
-  left: 0;
-  bottom: 5%;
-  width: 58%;
-  height: 35%;
-  background: rgba(178, 189, 199, 0.36);
+  left: 10%;
+  bottom: 10%;
+  width: 46%;
+  height: 24%;
+  background: rgba(104, 112, 121, 0.3);
 }
 
 .home-car-smoke span {
   position: absolute;
   display: block;
   border-radius: 999px;
-  filter: blur(18px);
+  filter: blur(10px);
 }
 
 .home-car-smoke span:nth-child(1) {
-  left: 3%;
-  bottom: 28%;
-  width: 34%;
-  height: 27%;
-  background: rgba(255, 255, 255, 0.88);
+  left: 2%;
+  bottom: 34%;
+  width: 28%;
+  height: 26%;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .home-car-smoke span:nth-child(2) {
-  left: 20%;
-  bottom: 39%;
-  width: 38%;
-  height: 31%;
-  background: rgba(227, 234, 241, 0.82);
+  left: 22%;
+  bottom: 48%;
+  width: 34%;
+  height: 30%;
+  background: rgba(196, 204, 211, 0.86);
 }
 
 .home-car-smoke span:nth-child(3) {
-  left: 46%;
-  bottom: 22%;
-  width: 31%;
-  height: 24%;
-  background: rgba(255, 255, 255, 0.82);
+  left: 52%;
+  bottom: 27%;
+  width: 27%;
+  height: 23%;
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .home-car-smoke span:nth-child(4) {
-  left: 14%;
-  bottom: 5%;
-  width: 55%;
-  height: 19%;
-  background: rgba(92, 111, 128, 0.24);
+  left: 16%;
+  bottom: 8%;
+  width: 38%;
+  height: 17%;
+  background: rgba(79, 88, 96, 0.28);
+}
+
+@keyframes homeCarAutoSwipe {
+  0% {
+    opacity: 0;
+    transform: translate3d(-120%, var(--car-pass-y), 0) scale(0.98);
+  }
+
+  8% {
+    opacity: 0.98;
+  }
+
+  48% {
+    opacity: 0.98;
+    transform: translate3d(24vw, var(--car-pass-y), 0) scale(1);
+  }
+
+  82% {
+    opacity: 0.96;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(114vw, var(--car-pass-y), 0) scale(0.99);
+  }
+}
+
+@keyframes homeCarSmokeTrail {
+  0% {
+    opacity: 0;
+    transform: translate3d(-96%, calc(var(--car-pass-y) + 8vh), 0) scale(0.58);
+  }
+
+  14% {
+    opacity: 0.94;
+  }
+
+  38% {
+    opacity: 0.76;
+    transform: translate3d(28vw, calc(var(--car-pass-y) + 8vh), 0) scale(1.02);
+  }
+
+  64% {
+    opacity: 0.34;
+    transform: translate3d(54vw, calc(var(--car-pass-y) + 8vh), 0) scale(1.32);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(74vw, calc(var(--car-pass-y) + 8vh), 0) scale(1.52);
+  }
+}
+
+@keyframes homeCarShineFlash {
+  0%,
+  12%,
+  70%,
+  100% {
+    opacity: 0;
+    transform: rotate(18deg) scale(0.72);
+  }
+
+  30%,
+  46% {
+    opacity: 0.92;
+    transform: rotate(18deg) scale(1);
+  }
+}
+
+@keyframes homeCarSparkFlash {
+  0%,
+  20%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: rotate(18deg) scale(0.7);
+  }
+
+  38%,
+  52% {
+    opacity: 0.95;
+    transform: rotate(18deg) scale(1);
+  }
+}
+
+@keyframes homeCarGleamSweep {
+  0%,
+  18%,
+  74%,
+  100% {
+    opacity: 0;
+    transform: translateX(-34%) skewX(-12deg);
+  }
+
+  34% {
+    opacity: 0.58;
+  }
+
+  58% {
+    opacity: 0.16;
+    transform: translateX(42%) skewX(-12deg);
+  }
+}
+
+@keyframes homeCarGlistenPop {
+  0%,
+  28%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: rotate(18deg) scale(0.72);
+  }
+
+  42%,
+  54% {
+    opacity: 0.96;
+    transform: rotate(18deg) scale(1);
+  }
 }
 
 .section {
@@ -2522,12 +2714,7 @@ h3 {
     transition: none;
   }
 
-  .home-car-sprite {
-    --car-x: 8vw;
-    --car-y: 64vh;
-    --car-opacity: 0.36;
-  }
-
+  .home-car-sprite,
   .home-car-smoke,
   .home-car-shine,
   .home-car-spark {

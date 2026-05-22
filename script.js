@@ -75,53 +75,34 @@ if (
   homeCarSmoke &&
   !window.matchMedia("(prefers-reduced-motion: reduce)").matches
 ) {
-  let animationFrame = null;
+  let hasTriggeredCarPass = false;
+  const carPassTriggerDistance = 140;
 
-  function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
+  function triggerCarPass() {
+    if (hasTriggeredCarPass) {
+      return;
+    }
+
+    hasTriggeredCarPass = true;
+    homeCarPass.classList.add("is-running");
+    window.removeEventListener("scroll", watchCarPassTrigger);
   }
 
-  function updateCarPass() {
-    animationFrame = null;
-    const doc = document.documentElement;
-    const scrollTop = window.scrollY || doc.scrollTop || 0;
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    const carWidth = homeCarSprite.offsetWidth;
-    const passStart = 0;
-    const passDistance = doc.scrollHeight - viewportHeight;
-    const passProgress = clamp((scrollTop - passStart) / passDistance, 0, 1);
-    const startX = -carWidth - 160;
-    const endX = viewportWidth + 180;
-    const carX = startX + ((endX - startX) * passProgress);
-    const carY = (viewportHeight * 0.54) - (viewportHeight * 0.1 * passProgress);
-    const active = passProgress > 0 && passProgress < 1 ? 1 : 0;
-    const fadeIn = clamp(passProgress / 0.025, 0, 1);
-    const fadeOut = clamp((1 - passProgress) / 0.1, 0, 1);
-    const opacity = active * Math.min(fadeIn, fadeOut);
-    const shinePulse = clamp(1 - Math.abs(passProgress - 0.34) / 0.16, 0, 1);
-    const smokePulse = opacity * clamp(1 - Math.abs(passProgress - 0.32) / 0.56, 0, 1);
-    const smokeX = carX - Math.min(carWidth * 0.26, 290);
-    const smokeY = carY + Math.min(carWidth * 0.09, 86);
+  function watchCarPassTrigger() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
 
-    homeCarPass.style.setProperty("--car-x", `${carX}px`);
-    homeCarPass.style.setProperty("--car-y", `${carY}px`);
-    homeCarPass.style.setProperty("--car-opacity", (opacity * 0.96).toFixed(3));
-    homeCarPass.style.setProperty("--shine-opacity", shinePulse.toFixed(3));
-    homeCarPass.style.setProperty("--smoke-x", `${smokeX}px`);
-    homeCarPass.style.setProperty("--smoke-y", `${smokeY}px`);
-    homeCarPass.style.setProperty("--smoke-opacity", (smokePulse * 0.95).toFixed(3));
-  }
-
-  function requestCarPassUpdate() {
-    if (animationFrame === null) {
-      animationFrame = window.requestAnimationFrame(updateCarPass);
+    if (scrollTop >= carPassTriggerDistance) {
+      triggerCarPass();
     }
   }
 
-  updateCarPass();
-  window.addEventListener("scroll", requestCarPassUpdate, { passive: true });
-  window.addEventListener("resize", requestCarPassUpdate);
+  homeCarSprite.addEventListener("animationend", () => {
+    homeCarPass.classList.add("has-run");
+    homeCarPass.classList.remove("is-running");
+  }, { once: true });
+
+  watchCarPassTrigger();
+  window.addEventListener("scroll", watchCarPassTrigger, { passive: true });
 }
 
 function closeAllServiceDropdowns(except) {
