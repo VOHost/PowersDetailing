@@ -1,5 +1,3 @@
-const WEB3FORMS_KEY = "18fca95c-44ad-4ddf-b722-5aa491ed6024";
-
 const menuToggle = document.querySelector(".menu-toggle");
 const navWrap = document.querySelector(".nav-wrap");
 const navLinks = document.querySelectorAll(".nav-wrap a");
@@ -332,7 +330,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ─── Form submission — claim slot then send via Web3Forms ────────────
+// ─── Form submission — Netlify Forms ────────────────────────────────
 if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -344,77 +342,26 @@ if (contactForm) {
       button.disabled = true;
     }
 
-    const dateVal = contactForm.querySelector("input[name='preferred-date']")?.value;
-    const timeVal = contactForm.querySelector("input[name='preferred-time']:checked")?.value;
-
-    // If both date and time are selected, atomically claim the slot first
-    if (dateVal && timeVal) {
-      try {
-        const bookRes = await fetch("/api/book", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ date: dateVal, time: timeVal })
-        });
-        const bookData = await bookRes.json();
-
-        if (!bookData.success) {
-          if (button) {
-            button.textContent = originalText;
-            button.disabled = false;
-          }
-          if (slotNote) {
-            slotNote.textContent = bookData.error || "That time is no longer available. Please choose another.";
-            slotNote.className = "slot-note slot-error";
-          }
-          fetchAvailability(dateVal);
-          return;
-        }
-      } catch {
-        if (button) {
-          button.textContent = originalText;
-          button.disabled = false;
-        }
-        if (slotNote) {
-          slotNote.textContent = "Booking failed. Please try again.";
-          slotNote.className = "slot-note slot-error";
-        }
-        return;
-      }
-    }
-
-    // Slot claimed (or no date/time selected) — send inquiry via Web3Forms
-    const formData = new FormData(contactForm);
-    formData.append("access_key", WEB3FORMS_KEY);
-    formData.append("subject", "New Booking Request: Powers Mobile Services");
-    formData.append("from_name", "Powers Mobile Services Website");
-
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      await fetch("/", {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(contactForm)).toString()
       });
-      const data = await res.json();
 
-      if (button) {
-        if (data.success) {
-          button.textContent = "Inquiry Sent!";
-          contactForm.reset();
-          const valueEl = contactForm.querySelector(".service-select-value");
-          if (valueEl) {
-            valueEl.textContent = "Choose a category...";
-            valueEl.classList.remove("has-selection");
-          }
-          const wrap = contactForm.querySelector(".service-select-wrap");
-          if (wrap) wrap.removeAttribute("data-open");
-          const totalEl = document.getElementById("booking-total");
-          if (totalEl) totalEl.hidden = true;
-          clearTimeSlotAvailability();
-          if (slotNote) slotNote.textContent = "";
-        } else {
-          button.textContent = originalText;
-          button.disabled = false;
-        }
+      button.textContent = "Inquiry Sent!";
+      contactForm.reset();
+      const valueEl = contactForm.querySelector(".service-select-value");
+      if (valueEl) {
+        valueEl.textContent = "Choose a category...";
+        valueEl.classList.remove("has-selection");
       }
+      const wrap = contactForm.querySelector(".service-select-wrap");
+      if (wrap) wrap.removeAttribute("data-open");
+      const totalEl = document.getElementById("booking-total");
+      if (totalEl) totalEl.hidden = true;
+      clearTimeSlotAvailability();
+      if (slotNote) slotNote.textContent = "";
     } catch {
       if (button) {
         button.textContent = originalText;
